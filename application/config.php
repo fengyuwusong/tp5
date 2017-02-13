@@ -236,4 +236,28 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    // 数据库1
+    'db1'                    => [
+        'type'     => 'mysql',
+        'hostname' => '127.0.0.1',
+        'database' => 'demo',
+        'username' => 'root',
+        'password' => 'root',
+        'hostport' => '',
+        'params'   => [],
+        'charset'  => 'utf8',
+        'prefix'   => 'think_',
+    ],
+    // 数据库2
+    'db2'                    => [
+        'type'     => 'mysql',
+        'hostname' => '127.0.0.1',
+        'database' => 'demo',
+        'username' => 'root',
+        'password' => 'root',
+        'hostport' => '',
+        'params'   => [],
+        'charset'  => 'utf8',
+        'prefix'   => 'think_',
+    ],
 ];
