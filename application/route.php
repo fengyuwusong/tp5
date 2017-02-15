@@ -35,4 +35,14 @@ return [
         '/get/:id$'                => 'index/blog/get',
         '/archive-<year>-<month>$' => 'index/blog/archive',
     ],
+    // 模型定义准备工作
+    '[user]'        => [
+        '/index'      => 'index/user/index',
+        '/create'     => 'index/user/create',
+        '/add'        => 'index/user/add',
+        '/add_list'   => 'index/user/addList',
+        '/update/:id' => 'index/user/update',
+        '/delete/:id' => 'index/user/delete',
+        '/:id'        => 'index/user/read',
+    ],
 ];
