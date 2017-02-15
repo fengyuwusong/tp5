@@ -74,30 +74,72 @@ class User
         $user4 = UserModel::where('email', 'like', '%think%')->find();
         // dump($user4->nickname);
     }
-    // 数据列表 查询多个数据
+    // 数据列表 查询多个数据 查询范围
     public function index()
     {
         $list = UserModel::all();
         foreach ($list as $key => $user) {
             echo $user->nickname . '<br/>';
             echo $user->email . '<br/>';
-            echo date('Y-m-d', $user->birthday) . '<br/>';
+            // echo date('Y-m-d', $user->birthday) . '<br/>';
             echo "------------------------------------<br/>";
         }
-        $list = UserModel::all(['status' => 1]);
-        foreach ($list as $key => $user) {
-            echo $user->nickname . '<br/>';
-            echo $user->email . '<br/>';
-            echo date('Y-m-d', $user->birthday) . '<br/>';
-            echo "------------------------------------<br/>";
-        }
-        $list = UserModel::where('id', 'gt', '3')->select();
-        foreach ($list as $key => $user) {
-            echo $user->nickname . '<br/>';
-            echo $user->email . '<br/>';
-            echo date('Y-m-d', $user->birthday) . '<br/>';
-            echo "------------------------------------<br/>";
-        }
+        // $list = UserModel::all(['status' => 1]);
+        // foreach ($list as $key => $user) {
+        //     echo $user->nickname . '<br/>';
+        //     echo $user->email . '<br/>';
+        //     echo date('Y-m-d', $user->birthday) . '<br/>';
+        //     echo "------------------------------------<br/>";
+        // }
+        // $list = UserModel::where('id', 'gt', '3')->select();
+        // foreach ($list as $key => $user) {
+        //     echo $user->nickname . '<br/>';
+        //     echo $user->email . '<br/>';
+        //     echo date('Y-m-d', $user->birthday) . '<br/>';
+        //     echo "------------------------------------<br/>";
+        // }
+        // 查询范围
+        // $list = UserModel::scope('email, status')->all();
+        // foreach ($list as $key => $user) {
+        //     echo $user->nickname . '<br/>';
+        //     echo $user->email . '<br/>';
+        //     echo $user->birthday . '<br/>';
+        //     echo $user->status . '<br/>';
+        //     echo "------------------------------------<br/>";
+        // }
+        // 等效
+        // $list = UserModel::scope('email')->scope('status')->all();
+        // foreach ($list as $key => $user) {
+        //     echo $user->nickname . '<br/>';
+        //     echo $user->email . '<br/>';
+        //     echo $user->birthday . '<br/>';
+        //     echo $user->status . '<br/>';
+        //     echo "------------------------------------<br/>";
+        // }
+        // 可闭包
+        // $list = UserModel::scope('email, status')
+        //     ->scope(function ($query) {
+        //         $query->order('id', 'desc');
+        //     })->all();
+        // foreach ($list as $key => $user) {
+        //     echo $user->nickname . '<br/>';
+        //     echo $user->email . '<br/>';
+        //     echo $user->birthday . '<br/>';
+        //     echo $user->status . '<br/>';
+        //     echo "------------------------------------<br/>";
+        // }
+        // 支持参数
+        // $list = UserModel::scope('email', 'thinkphp@qq.com')
+        //     ->scope(function ($query) {
+        //         $query->order('id', 'desc');
+        //     })->all();
+        // foreach ($list as $key => $user) {
+        //     echo $user->nickname . '<br/>';
+        //     echo $user->email . '<br/>';
+        //     echo $user->birthday . '<br/>';
+        //     echo $user->status . '<br/>';
+        //     echo "------------------------------------<br/>";
+        // }
     }
     // 更新数据
     public function update($id)

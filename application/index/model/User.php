@@ -77,4 +77,27 @@ class User extends Model
         $status = [-1 => '删除', 0 => '禁用', 1 => '正常', 2 => '待审核'];
         return $status[$value];
     }
+    // 查询范围
+    // 对一些常用的查询条件可封装为查询范围进行调用
+    // scope+查询范围名称
+    // email查询
+    protected function scopeEmail($query)
+    {
+        $query->where('email', 'thinkphp@qq.com');
+    }
+    // status查询
+    protected function scopeStatus($query)
+    {
+        $query->where('status', 1);
+    }
+    // 查询范围支持额外参数
+    protected function scopeDemo($query, $email = '')
+    {
+        $query->where('email', $email);
+    }
+    // 全局范围查询 自动开启 base
+    protected static function base($query)
+    {
+        $query->where('status', 1);
+    }
 }
