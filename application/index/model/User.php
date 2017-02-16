@@ -96,8 +96,8 @@ class User extends Model
         $query->where('email', $email);
     }
     // 全局范围查询 自动开启 base
-    protected static function base($query)
-    {
-        $query->where('status', 1);
-    }
+    // protected static function base($query)
+    // {
+    //     $query->where('status', 1);
+    // }
 }

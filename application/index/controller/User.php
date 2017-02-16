@@ -7,23 +7,48 @@ namespace app\index\controller;
 
 // as 给别名UserModel 为了避免与当前 app\index\controller\User 冲突
 use app\index\model\User as UserModel;
+use think\Controller;
+use think\Validate;
 
-class User
+class User extends Controller
 {
     // 新增用户数据
     public function add()
     {
+        // $user = new UserModel;
+        // // allowField 避免验证字段写入表单
+        // if ($user->allowField(true)->validate(true)->save(input('post.'))) {
+        //     return '用户[' . $user->nickname . ':' . $user->id . ']新增成功！';
+        // } else {
+        //     return $user->getError();
+        // }
+        $data = input('post.');
+        // 控制器验证数据  data 数据  user验证器
+        $res = $this->validate($data, 'User');
+        if (true !== $res) {
+            return $res;
+        } else {
+            $user = new UserModel;
+            if ($user->allowField(true)->save(input('post.'))) {
+                // return '用户[' . $user->nickname . ':' . $user->id . ']新增成功！';
+            } else {
+                // return $user->getError();
+            }
+        }
+        // 或可写静态方法
+        $res = Validate::is($user->birthday, 'date');
+        dump($res);
         // 方法一
         // 避免冲突User
-        $user           = new UserModel;
-        $user->nickname = '流年';
-        $user->email    = 'thinkphp@qq.com';
-        $user->birthday = '1977-03-05';
-        if ($user->save()) {
-            return '用户[' . $user->nickname . ":" . $user->id . ']新增成功！';
-        } else {
-            return $user->getError();
-        }
+        // $user           = new UserModel;
+        // $user->nickname = '流年';
+        // $user->email    = 'thinkphp@qq.com';
+        // $user->birthday = '1977-03-05';
+        // if ($user->save()) {
+        //     return '用户[' . $user->nickname . ":" . $user->id . ']新增成功！';
+        // } else {
+        //     return $user->getError();
+        // }
         // 方法二
         // 可以是对象 数组 表单数据
         // $user['nickname'] = '看云';
@@ -177,5 +202,9 @@ class User
         } else {
             return "用户不存在！";
         }
+    }
+    public function create()
+    {
+        return view();
     }
 }
